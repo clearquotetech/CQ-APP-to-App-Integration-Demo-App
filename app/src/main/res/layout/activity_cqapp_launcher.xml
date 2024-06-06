@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        tools:context=".cqapplauncher.CQAppLauncherActivity">
+
+        <!--LP Number edit text-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlLPNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="Enter LP"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etLPNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--Launch CQ app button-->
+        <Button
+            android:id="@+id/btnLaunchCQApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Launch CQ App"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tlLPNumber" />
+
+        <!--Heading response from CQ-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Response from ClearQuote Inspections App"/>
+
+        <!--Message from CQ-->
+        <TextView
+            android:id="@+id/tvMsgFromCq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textIsSelectable="true" />
+
+        <!--Quote id-->
+        <TextView
+            android:id="@+id/tvQuoteIdFromCq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textIsSelectable="true"/>
+
+        <!--Registration Number-->
+        <TextView
+            android:id="@+id/tvRegistrationNumberFromCq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textIsSelectable="true"/>
+
+        <!--Public details page URL-->
+        <TextView
+            android:id="@+id/tvPublicDetailsPageFromCq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textIsSelectable="true"/>
+    </LinearLayout>
+</ScrollView>
