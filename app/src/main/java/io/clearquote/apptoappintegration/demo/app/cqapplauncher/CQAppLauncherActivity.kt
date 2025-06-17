@@ -7,6 +7,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.Uri
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -17,6 +18,11 @@ import io.clearquote.apptoappintegration.demo.app.databinding.ActivityCqappLaunc
 class CQAppLauncherActivity : AppCompatActivity() {
     // Binding
     private lateinit var binding: ActivityCqappLauncherBinding
+
+    // Version selector
+    private val integrationVersion1 = "Version 1 (Broadcast rec)"
+    private val integrationVersion2 = "Version 2 (Deeplinks)"
+    private val returnUri = Uri.encode("cqapptoappintegration://inspection")
 
     // Broadcast receiver for other events
     private val broadcastReceiver: BroadcastReceiver =
@@ -44,7 +50,7 @@ class CQAppLauncherActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Populate options for the version selector dropdown
-        val versionList = listOf("Version 1 (Broadcast rec)", "Version 2 (Deeplinks)")
+        val versionList = listOf(integrationVersion1, integrationVersion2)
         val adapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, versionList)
         binding.acSelectVersion.setAdapter(adapter)
         binding.acSelectVersion.setText(versionList[0], false)
@@ -100,6 +106,14 @@ class CQAppLauncherActivity : AppCompatActivity() {
     }
 
     private fun launchCQApp() {
+        if (binding.acSelectVersion.text.toString() == integrationVersion1) {
+            launchCQAppForIntegrationVersion1()
+        } else {
+            launchCQAppForIntegrationVersion2()
+        }
+    }
+
+    private fun launchCQAppForIntegrationVersion1() {
         // Launch CQ app
         val CQAppPackageName = "io.clearquote.assessment"
         val cName = ComponentName(CQAppPackageName, "${CQAppPackageName}.AppToAppIntegrationSupportActivity")
@@ -117,5 +131,18 @@ class CQAppLauncherActivity : AppCompatActivity() {
             e.printStackTrace()
             Toast.makeText(this, "Could not find the target app", Toast.LENGTH_LONG).show()
         }
+    }
+
+    private fun launchCQAppForIntegrationVersion2() {
+        val uri = Uri.parse(
+            "clearinspect://inspection" +
+                "?integrationVersion=v2" +
+                "&registrationNumber=${binding.etLPNumber.text.toString()}" +
+                "&source=DoForms" +
+                "&packageName=$packageName" +
+                "&returnPageAddress=$returnUri"
+        )
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(intent)
     }
 }
