@@ -16,16 +16,31 @@
         android:paddingRight="20dp"
         tools:context=".cqapplauncher.CQAppLauncherActivity">
 
+        <!--Version selector-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tlSelectVersion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select version"
+            android:layout_marginTop="10dp">
+            <AutoCompleteTextView
+                android:id="@+id/acSelectVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <!--LP Number edit text-->
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tlLPNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
             android:hint="Enter LP"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="10dp">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etLPNumber"
                 android:layout_width="match_parent"

@@ -1,5 +1,6 @@
 package io.clearquote.apptoappintegration.demo.app.cqapplauncher
 
+import android.R
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
 import android.content.ComponentName
@@ -7,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -40,6 +42,12 @@ class CQAppLauncherActivity : AppCompatActivity() {
         // Initialize binding
         binding = ActivityCqappLauncherBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Populate options for the version selector dropdown
+        val versionList = listOf("Version 1 (Broadcast rec)", "Version 2 (Deeplinks)")
+        val adapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, versionList)
+        binding.acSelectVersion.setAdapter(adapter)
+        binding.acSelectVersion.setText(versionList[0], false)
 
         // Set click listener on the launch cq app
         binding.btnLaunchCQApp.setOnClickListener {
