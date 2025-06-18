@@ -9,6 +9,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -53,7 +54,7 @@ class CQAppLauncherActivity : AppCompatActivity() {
         val versionList = listOf(integrationVersion1, integrationVersion2)
         val adapter = ArrayAdapter(this, R.layout.simple_dropdown_item_1line, versionList)
         binding.acSelectVersion.setAdapter(adapter)
-        binding.acSelectVersion.setText(versionList[0], false)
+        binding.acSelectVersion.setText(versionList[1], false)
 
         // Set click listener on the launch cq app
         binding.btnLaunchCQApp.setOnClickListener {
@@ -62,6 +63,23 @@ class CQAppLauncherActivity : AppCompatActivity() {
 
         // Register broadcast receiver
         registerBroadCastReceivers()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        // Get extras
+        val msg = intent.data?.getQueryParameter("msg")
+        val quoteId = intent.data?.getQueryParameter("quoteId")
+        val publicDetailsPageUrl = intent.data?.getQueryParameter("publicDetailsPageUrl")
+        val registrationNumber = intent.data?.getQueryParameter("registrationNumber")
+
+        if (intent.data != null) {
+            binding.tvMsgFromCq.text = "Message: $msg"
+            binding.tvQuoteIdFromCq.text = "QuoteId: $quoteId"
+            binding.tvRegistrationNumberFromCq.text = "Registration Number: $registrationNumber"
+            binding.tvPublicDetailsPageFromCq.text = "Public details page URL: $publicDetailsPageUrl"
+        }
     }
 
     override fun onDestroy() {
@@ -142,7 +160,13 @@ class CQAppLauncherActivity : AppCompatActivity() {
                 "&packageName=$packageName" +
                 "&returnPageAddress=$returnUri"
         )
+        Log.e("AppToAppIntegrationSupportActivityAG", "Encoded URI -> $returnUri")
         val intent = Intent(Intent.ACTION_VIEW, uri)
-        startActivity(intent)
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Could not find the target app", Toast.LENGTH_LONG).show()
+        }
     }
 }
