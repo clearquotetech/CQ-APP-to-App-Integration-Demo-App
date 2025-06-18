@@ -75,10 +75,13 @@ class CQAppLauncherActivity : AppCompatActivity() {
         val registrationNumber = intent.data?.getQueryParameter("registrationNumber")
 
         if (intent.data != null) {
+            // Decode public detail page uri
+            val decodedPublicDetailsPageUri = Uri.decode(publicDetailsPageUrl)
+
             binding.tvMsgFromCq.text = "Message: $msg"
             binding.tvQuoteIdFromCq.text = "QuoteId: $quoteId"
             binding.tvRegistrationNumberFromCq.text = "Registration Number: $registrationNumber"
-            binding.tvPublicDetailsPageFromCq.text = "Public details page URL: $publicDetailsPageUrl"
+            binding.tvPublicDetailsPageFromCq.text = "Public details page URL: $decodedPublicDetailsPageUri"
         }
     }
 
