@@ -33,10 +33,18 @@ class CQAppLauncherActivity : AppCompatActivity() {
                 if (p1 != null) {
                     when (p1.action) {
                         "ClearQuoteInspectionCreationAction" -> {
+                            Log.e("AppToAppIntegrationSupportActivityAG", "14")
+
+                            // Render values inside text views
                             binding.tvMsgFromCq.text = "Message: ${p1.getStringExtra("msg")}"
                             binding.tvQuoteIdFromCq.text = "QuoteId: ${p1.getStringExtra("quoteId")}"
                             binding.tvRegistrationNumberFromCq.text = "Registration Number: ${p1.getStringExtra("registrationNumber")}"
                             binding.tvPublicDetailsPageFromCq.text = "Public details page URL: ${p1.getStringExtra("publicDetailsPageUrl")}"
+
+                            Log.e("AppToAppIntegrationSupportActivityAG", "onReceive msg -> ${p1.getStringExtra("msg")}")
+                            Log.e("AppToAppIntegrationSupportActivityAG", "onReceive quoteId -> ${p1.getStringExtra("quoteId")}")
+                            Log.e("AppToAppIntegrationSupportActivityAG", "onReceive registrationNumber -> ${p1.getStringExtra("registrationNumber")}")
+                            Log.e("AppToAppIntegrationSupportActivityAG", "onReceive publicDetailsPageUrl -> ${p1.getStringExtra("publicDetailsPageUrl")}")
                         }
                     }
                 }
@@ -45,6 +53,8 @@ class CQAppLauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.e("AppToAppIntegrationSupportActivityAG", "1")
 
         // Initialize binding
         binding = ActivityCqappLauncherBinding.inflate(layoutInflater)
@@ -63,6 +73,9 @@ class CQAppLauncherActivity : AppCompatActivity() {
 
         // Register broadcast receiver
         registerBroadCastReceivers()
+
+        Log.e("AppToAppIntegrationSupportActivityAG", "2")
+        Log.e("AppToAppIntegrationSupportActivityAG", "inside onCreate")
     }
 
     override fun onResume() {
@@ -135,6 +148,8 @@ class CQAppLauncherActivity : AppCompatActivity() {
     }
 
     private fun launchCQAppForIntegrationVersion1() {
+        Log.e("AppToAppIntegrationSupportActivityAG", "3")
+
         // Launch CQ app
         val CQAppPackageName = "io.clearquote.assessment"
         val cName = ComponentName(CQAppPackageName, "${CQAppPackageName}.AppToAppIntegrationSupportActivity")
