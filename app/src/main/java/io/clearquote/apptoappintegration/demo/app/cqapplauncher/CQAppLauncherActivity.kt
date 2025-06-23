@@ -149,6 +149,7 @@ class CQAppLauncherActivity : AppCompatActivity() {
         try {
             startActivity(intent)
         } catch (e: Exception) {
+            binding.tvErrorInV1.text = e.message
             e.printStackTrace()
             Toast.makeText(this, "Could not find the target app", Toast.LENGTH_LONG).show()
         }
@@ -167,6 +168,7 @@ class CQAppLauncherActivity : AppCompatActivity() {
         try {
             startActivity(intent)
         } catch (e: Exception) {
+            binding.tvErrorInV2.text = e.message
             e.printStackTrace()
             Toast.makeText(this, "Could not find the target app", Toast.LENGTH_LONG).show()
         }
